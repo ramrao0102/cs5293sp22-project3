@@ -53,9 +53,9 @@ def normalize_text(df):
         df["Sentence"][i] = df["Sentence"][i].lower()
         df["Sentence"][i] = df["Sentence"][i].replace("'s", "")
 
-        df["Person"][i] = df["Person"][i].replace("\s{2,}", " ")
+        df["Person"][i] = df["Person"][i].replace(r'\s{2,}', " ")
         df["Person"][i] = df["Person"][i].lower()
-        df["Person"][i] = df["Person"][i].replace("\s$", "")
+        df["Person"][i] = df["Person"][i].replace(r'\s$', "")
         df["Person"][i] = df["Person"][i].replace("'s", "")
         df["Person"][i] = df["Person"][i].replace("'$", "")
         df["Person"][i] = df["Person"][i].replace("ms ", "")
