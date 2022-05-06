@@ -248,36 +248,34 @@ if __name__ == "__main__":
     # Need to do feature engineering first
     # Count Vectorizer
 
-    # cv = CountVectorizer(binary=False, min_df=0.0, max_df=1.0)
+    cv = CountVectorizer(binary=False, min_df=0.0, max_df=1.0)
 
-    # cv_train_features = cv.fit_transform(train_corpus)
+    cv_train_features = cv.fit_transform(train_corpus)
 
-    # cv_train_label = cv.fit_transform(train_label)
+    cv_validation_features = cv.transform(validation_corpus)
 
-    # cv_validation_features = cv.transform(validation_corpus)
-
-    # cv_test_features = cv.transform(test_corpus)
+    cv_test_features = cv.transform(test_corpus)
 
     # TF-IDF Vectorizer
 
-    tv = TfidfVectorizer(use_idf=True, min_df=0.0, max_df=1.0)
+    #tv = TfidfVectorizer(use_idf=True, min_df=0.0, max_df=1.0)
 
-    tv_train_features = tv.fit_transform(train_corpus)
+    #tv_train_features = tv.fit_transform(train_corpus)
 
-    tv_validation_features = tv.transform(validation_corpus)
+    #tv_validation_features = tv.transform(validation_corpus)
 
-    tv_test_features = tv.transform(test_corpus)
+    #tv_test_features = tv.transform(test_corpus)
 
     mnb = MultinomialNB(alpha=1)
-    mnb.fit(tv_train_features, train_label)
+    mnb.fit(cv_train_features, train_label)
 
-    mnb_bow_validation_score = mnb.score(tv_validation_features, validation_label)
+    mnb_bow_validation_score = mnb.score(cv_validation_features, validation_label)
 
-    mnb_bow_test_score = mnb.score(tv_test_features, test_label)
+    mnb_bow_test_score = mnb.score(cv_test_features, test_label)
     # print(mnb_bow_validation_score)
     # print(mnb_bow_test_score)
 
-    mnb_validation_predictions = mnb.predict(tv_validation_features)
+    mnb_validation_predictions = mnb.predict(cv_validation_features)
     precision = precision_score(
         validation_label, mnb_validation_predictions, average="micro"
     )
@@ -286,7 +284,7 @@ if __name__ == "__main__":
     accuracy = accuracy_score(validation_label, mnb_validation_predictions)
     print(precision, recall, F1_score, accuracy)
 
-    mnb_test_predictions = mnb.predict(tv_test_features)
+    mnb_test_predictions = mnb.predict(cv_test_features)
     precision = precision_score(test_label, mnb_test_predictions, average="micro")
     recall = recall_score(test_label, mnb_test_predictions, average="micro")
     F1_score = f1_score(test_label, mnb_test_predictions, average="micro")
@@ -296,14 +294,14 @@ if __name__ == "__main__":
     # Logistic Regression
 
     lr = LogisticRegression(penalty="l2", max_iter=100, C=1, random_state=42)
-    lr.fit(tv_train_features, train_label)
+    lr.fit(cv_train_features, train_label)
 
-    lr_bow_validation_score = lr.score(tv_validation_features, validation_label)
+    lr_bow_validation_score = lr.score(cv_validation_features, validation_label)
     # print(lr_bow_validation_score)
-    lr_bow_test_score = lr.score(tv_test_features, test_label)
+    lr_bow_test_score = lr.score(cv_test_features, test_label)
     # print(lr_bow_test_score)
 
-    lr_validation_predictions = lr.predict(tv_validation_features)
+    lr_validation_predictions = lr.predict(cv_validation_features)
     precision = precision_score(
         validation_label, lr_validation_predictions, average="micro"
     )
@@ -312,7 +310,7 @@ if __name__ == "__main__":
     accuracy = accuracy_score(validation_label, lr_validation_predictions)
     print(precision, recall, F1_score, accuracy)
 
-    lr_test_predictions = lr.predict(tv_test_features)
+    lr_test_predictions = lr.predict(cv_test_features)
     precision = precision_score(test_label, lr_test_predictions, average="micro")
     recall = recall_score(test_label, lr_test_predictions, average="micro")
     F1_score = f1_score(test_label, lr_test_predictions, average="micro")
@@ -322,13 +320,13 @@ if __name__ == "__main__":
     # Support Vector Machines
 
     svm = LinearSVC(penalty="l2", C=1, random_state=42)
-    svm.fit(tv_train_features, train_label)
-    svm_bow_validation_score = svm.score(tv_validation_features, validation_label)
-    svm_bow_test_score = svm.score(tv_test_features, test_label)
+    svm.fit(cv_train_features, train_label)
+    svm_bow_validation_score = svm.score(cv_validation_features, validation_label)
+    svm_bow_test_score = svm.score(cv_test_features, test_label)
     # print(svm_bow_validation_score)
     # print(svm_bow_test_score)
 
-    svm_validation_predictions = svm.predict(tv_validation_features)
+    svm_validation_predictions = svm.predict(cv_validation_features)
     precision = precision_score(
         validation_label, svm_validation_predictions, average="micro"
     )
@@ -337,7 +335,7 @@ if __name__ == "__main__":
     accuracy = accuracy_score(validation_label, svm_validation_predictions)
     print(precision, recall, F1_score, accuracy)
 
-    svm_test_predictions = svm.predict(tv_test_features)
+    svm_test_predictions = svm.predict(cv_test_features)
     precision = precision_score(test_label, svm_test_predictions, average="micro")
     recall = recall_score(test_label, svm_test_predictions, average="micro")
     F1_score = f1_score(test_label, svm_test_predictions, average="micro")
