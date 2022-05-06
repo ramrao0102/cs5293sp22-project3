@@ -1,4 +1,3 @@
-
 # This is Ramkishore Rao's Project3 for CS5293
 
 import urllib.request
@@ -28,11 +27,28 @@ import spacy
 
 tokenize_words = nltk.word_tokenize
 
+
 def download_file(download_url, filename):
     response = urllib.request.urlopen(download_url)
     file = open(filename, "wb")
     file.write(response.read())
-    file.close() 
+    file.close()
+
+
+def create_dataframe(filename):
+    oolumn_names = []
+
+    oolumn_names.append("Name")
+    oolumn_names.append("Type")
+    oolumn_names.append("Person")
+    oolumn_names.append("Sentence")
+
+    df = pd.read_csv(
+        filename, sep="\t", names=oolumn_names, on_bad_lines="skip", engine="python"
+    )
+
+    return df
+
 
 def swap_columns(df, col1, col2):
     col_list = list(df.columns)
@@ -40,6 +56,7 @@ def swap_columns(df, col1, col2):
     col_list[y], col_list[x] = col_list[x], col_list[y]
     df = df[col_list]
     return df
+
 
 def normalize_text(df):
 
@@ -53,9 +70,9 @@ def normalize_text(df):
         df["Sentence"][i] = df["Sentence"][i].lower()
         df["Sentence"][i] = df["Sentence"][i].replace("'s", "")
 
-        df["Person"][i] = df["Person"][i].replace(r'\s{2,}', " ")
+        df["Person"][i] = df["Person"][i].replace(r"\s{2,}", " ")
         df["Person"][i] = df["Person"][i].lower()
-        df["Person"][i] = df["Person"][i].replace(r'\s$', "")
+        df["Person"][i] = df["Person"][i].replace(r"\s$", "")
         df["Person"][i] = df["Person"][i].replace("'s", "")
         df["Person"][i] = df["Person"][i].replace("'$", "")
         df["Person"][i] = df["Person"][i].replace("ms ", "")
@@ -68,7 +85,9 @@ def normalize_text(df):
 
     return df
 
+
 # this below function consolidates context_strings
+
 
 def consolidate_names(df):
 
@@ -82,6 +101,7 @@ def consolidate_names(df):
                         df["Person"][i] = df["Person"][j]
 
     return df
+
 
 def feature_selection(df):
 
@@ -138,16 +158,7 @@ if __name__ == "__main__":
 
     download_file(path, filename)
 
-    oolumn_names = []
-
-    oolumn_names.append("Name")
-    oolumn_names.append("Type")
-    oolumn_names.append("Person")
-    oolumn_names.append("Sentence")
-
-    df = pd.read_csv(
-        filename, sep="\t", names=oolumn_names, on_bad_lines="skip", engine="python"
-    )
+    df = create_dataframe(filename)
 
     # adjust line below as needed
     df = df.iloc[0:1443]
@@ -158,7 +169,7 @@ if __name__ == "__main__":
 
     # there seem to be some bad lines in her
 
-    #print(df.head())
+    # print(df.head())
 
     # print(len(df))
 
@@ -175,9 +186,9 @@ if __name__ == "__main__":
     for i in df.index:
         df["Sentence"][i] = df["Sentence"][i].replace("\u2588", "")
 
-    #print(df.head())
+    # print(df.head())
 
-    #print(df.head(100))
+    # print(df.head(100))
 
     # df.to_csv('datagy.csv')
 
@@ -185,19 +196,19 @@ if __name__ == "__main__":
 
     df_train = df.loc[df["Type"] == "training"]
 
-    #df_train.to_csv("datagy1.csv")
+    # df_train.to_csv("datagy1.csv")
 
     # Create a Validation Data Frame
 
     df_validation = df.loc[df["Type"] == "validation"]
 
-    #df_validation.to_csv("datagy2.csv")
+    # df_validation.to_csv("datagy2.csv")
 
     # Create a Test Data Frame
 
     df_test = df.loc[(df["Type"] == "testing") | (df["Type"] == "test")]
 
-    #df_test.to_csv("datagy3.csv")
+    # df_test.to_csv("datagy3.csv")
 
     # Creation of train, validation, and test datasets
 
@@ -206,33 +217,33 @@ if __name__ == "__main__":
         np.array(df_train["Person"]),
     )
 
-    #print(train_corpus.shape)
+    # print(train_corpus.shape)
 
-    #print(train_corpus[0])
+    # print(train_corpus[0])
 
-    #print(len(train_label))
+    # print(len(train_label))
 
     validation_corpus, validation_label = (
         np.array(df_validation["Final_Features"]),
         np.array(df_validation["Person"]),
     )
 
-    #print(validation_corpus.shape)
+    # print(validation_corpus.shape)
 
-    #print(validation_corpus[0])
+    # print(validation_corpus[0])
 
-    #print(len(validation_label))
+    # print(len(validation_label))
 
     test_corpus, test_label = (
         np.array(df_test["Final_Features"]),
         np.array(df_test["Person"]),
     )
 
-    #print(test_corpus.shape)
+    # print(test_corpus.shape)
 
-    #print(test_corpus[0])
+    # print(test_corpus[0])
 
-    #print(len(test_corpus))
+    # print(len(test_corpus))
 
     # Need to do feature engineering first
     # Count Vectorizer
@@ -263,8 +274,8 @@ if __name__ == "__main__":
     mnb_bow_validation_score = mnb.score(tv_validation_features, validation_label)
 
     mnb_bow_test_score = mnb.score(tv_test_features, test_label)
-    #print(mnb_bow_validation_score)
-    #print(mnb_bow_test_score)
+    # print(mnb_bow_validation_score)
+    # print(mnb_bow_test_score)
 
     mnb_validation_predictions = mnb.predict(tv_validation_features)
     precision = precision_score(
@@ -288,9 +299,9 @@ if __name__ == "__main__":
     lr.fit(tv_train_features, train_label)
 
     lr_bow_validation_score = lr.score(tv_validation_features, validation_label)
-    #print(lr_bow_validation_score)
+    # print(lr_bow_validation_score)
     lr_bow_test_score = lr.score(tv_test_features, test_label)
-    #print(lr_bow_test_score)
+    # print(lr_bow_test_score)
 
     lr_validation_predictions = lr.predict(tv_validation_features)
     precision = precision_score(
@@ -314,8 +325,8 @@ if __name__ == "__main__":
     svm.fit(tv_train_features, train_label)
     svm_bow_validation_score = svm.score(tv_validation_features, validation_label)
     svm_bow_test_score = svm.score(tv_test_features, test_label)
-    #print(svm_bow_validation_score)
-    #print(svm_bow_test_score)
+    # print(svm_bow_validation_score)
+    # print(svm_bow_test_score)
 
     svm_validation_predictions = svm.predict(tv_validation_features)
     precision = precision_score(
