@@ -6,8 +6,9 @@ This project consists of taking text files from the IMDB database and generating
 sentence that consist of text surrounding the redacted word.  The redacted word is the name in the sentence. <br>
 The focus of the second part of the project is to find the redacted word with the use of classfication models. <br>
 
+## RAM Requirement
 
-
+Use, atleast 8 GB RAM, for the VM instance for execution of code.<br>
 
 ## How to Run the Code
 
