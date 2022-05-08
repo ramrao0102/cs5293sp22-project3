@@ -69,3 +69,10 @@ The developed program is tested using pytest. <br>
 4) test_dataframe.py checks to make sure that the pandas dataframe is created from the unredactor file. <br>
 5) test_istheredata.py checks the redactor.py process and makes sure that the 90 sentences have been created following redaction. <br>
 6) test_prediction checks to make sure that for one of the models, Multinominal Bayes, the precision, recall, F1_score, and accuracy are greater than 0. <br>
+
+## Video Link
+
+Video Link to Video Hosted on Vimeo Site is provided below.
+
+
+https://vimeo.com/707420262
