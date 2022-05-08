@@ -8,7 +8,6 @@ Created on Sat Apr 30 17:36:15 2022
 import glob
 import io
 import os
-import pdb
 import sys
 import re
 
@@ -116,7 +115,7 @@ def redact_name(list1, text):
 
             if list2[i].isspace():
 
-                str1 = re.split(r'\s+', list2[i])
+                str1 = re.split(r"\s+", list2[i])
 
                 data1 = data1.replace(str1[0], "\u2588" * len(str1[0]))
 
@@ -145,14 +144,14 @@ if __name__ == "__main__":
     j = 0
 
     for i in files_grabbed:
-        #print(i)
+        # print(i)
         file_name = i
         with open(i) as f:
             text = f.read()
 
         text = text.replace(".<br /><br", ".")
         text = text.replace("<br", "")
-        text = text.replace(r'\s{2,}', " ")
+        text = text.replace(r"\s{2,}", " ")
 
         list4, list5 = find_entity(text)
         # print(list4)
@@ -168,10 +167,10 @@ if __name__ == "__main__":
                 redacted_text = redacted_text.replace("!", "")
                 redacted_text = redacted_text.replace("'s", " ")
 
-                #print(list4[i][0], redacted_text)
+                # print(list4[i][0], redacted_text)
                 if redacted_text != "":
                     j += 1
-                    #print(j)
+                    # print(j)
                     if j <= 50:
                         sent_type = "training"
 

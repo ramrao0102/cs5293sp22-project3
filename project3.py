@@ -261,13 +261,13 @@ if __name__ == "__main__":
 
     # TF-IDF Vectorizer
 
-    #tv = TfidfVectorizer(use_idf=True, min_df=0.0, max_df=1.0)
+    # tv = TfidfVectorizer(use_idf=True, min_df=0.0, max_df=1.0)
 
-    #tv_train_features = tv.fit_transform(train_corpus)
+    # tv_train_features = tv.fit_transform(train_corpus)
 
-    #tv_validation_features = tv.transform(validation_corpus)
+    # tv_validation_features = tv.transform(validation_corpus)
 
-    #tv_test_features = tv.transform(test_corpus)
+    # tv_test_features = tv.transform(test_corpus)
 
     mnb = MultinomialNB(alpha=1)
     mnb.fit(cv_train_features, train_label)
@@ -282,21 +282,63 @@ if __name__ == "__main__":
     precision = precision_score(
         validation_label, mnb_validation_predictions, average="micro"
     )
+    precision = precision * 100.0
     recall = recall_score(validation_label, mnb_validation_predictions, average="micro")
+    recall = recall * 100.0
     F1_score = f1_score(validation_label, mnb_validation_predictions, average="micro")
+    F1_score = F1_score * 100.0
     accuracy = accuracy_score(validation_label, mnb_validation_predictions)
-    print("Precision_Val_Bayes",",",  "Recall_Val_Bayes", ",", "F1_score_Val_Bayes", ",", "Accuracy_Val_Bayes") 
+    accuracy = accuracy * 100.0
+    print(
+        "Precision_Val_Bayes",
+        ",",
+        "Recall_Val_Bayes",
+        ",",
+        "F1_score_Val_Bayes",
+        ",",
+        "Accuracy_Val_Bayes",
+    )
 
-    print(precision, recall, F1_score, accuracy)
+    print(
+        "%.2f" % precision,
+        "%",
+        "%.2f" % recall,
+        "%",
+        "%.2f" % F1_score,
+        "%",
+        "%.2f" % accuracy,
+        "%",
+    )
 
     mnb_test_predictions = mnb.predict(cv_test_features)
     precision = precision_score(test_label, mnb_test_predictions, average="micro")
+    precision = precision * 100.0
     recall = recall_score(test_label, mnb_test_predictions, average="micro")
+    recall = recall * 100.0
     F1_score = f1_score(test_label, mnb_test_predictions, average="micro")
+    F1_score = F1_score * 100.0
     accuracy = accuracy_score(test_label, mnb_test_predictions)
-    print("Precision_Test_Bayes", ",", "Recall_Test_Bayes", ",", "F1_score_Test_Bayes", ",", "Accuracy_Test_Bayes")
+    accuracy = accuracy * 100.0
+    print(
+        "Precision_Test_Bayes",
+        ",",
+        "Recall_Test_Bayes",
+        ",",
+        "F1_score_Test_Bayes",
+        ",",
+        "Accuracy_Test_Bayes",
+    )
 
-    print(precision, recall, F1_score, accuracy)
+    print(
+        "%.2f" % precision,
+        "%",
+        "%.2f" % recall,
+        "%",
+        "%.2f" % F1_score,
+        "%",
+        "%.2f" % accuracy,
+        "%",
+    )
 
     # Logistic Regression
 
@@ -312,21 +354,61 @@ if __name__ == "__main__":
     precision = precision_score(
         validation_label, lr_validation_predictions, average="micro"
     )
+    precision = precision * 100.0
     recall = recall_score(validation_label, lr_validation_predictions, average="micro")
+    recall = recall * 100.0
     F1_score = f1_score(validation_label, lr_validation_predictions, average="micro")
+    F1_score = F1_score * 100.0
     accuracy = accuracy_score(validation_label, lr_validation_predictions)
-
-    print("Precision_Val_LR",",",  "Recall_Val_LR", ",", "F1_score_Val_LR", ",", "Accuracy_Val_LR") 
-    print(precision, recall, F1_score, accuracy)
+    accuracy = accuracy * 100.0
+    print(
+        "Precision_Val_LR",
+        ",",
+        "Recall_Val_LR",
+        ",",
+        "F1_score_Val_LR",
+        ",",
+        "Accuracy_Val_LR",
+    )
+    print(
+        "%.2f" % precision,
+        "%",
+        "%.2f" % recall,
+        "%",
+        "%.2f" % F1_score,
+        "%",
+        "%.2f" % accuracy,
+        "%",
+    )
 
     lr_test_predictions = lr.predict(cv_test_features)
     precision = precision_score(test_label, lr_test_predictions, average="micro")
+    precision = precision * 100.0
     recall = recall_score(test_label, lr_test_predictions, average="micro")
+    recall = recall * 100.0
     F1_score = f1_score(test_label, lr_test_predictions, average="micro")
+    F1_score = F1_score * 100.0
     accuracy = accuracy_score(test_label, lr_test_predictions)
-
-    print("Precision_Test_LR",",",  "Recall_Test_LR", ",", "F1_score_Test_LR", ",", "Accuracy_Test_LR")
-    print(precision, recall, F1_score, accuracy)
+    accuracy = accuracy * 100.0
+    print(
+        "Precision_Test_LR",
+        ",",
+        "Recall_Test_LR",
+        ",",
+        "F1_score_Test_LR",
+        ",",
+        "Accuracy_Test_LR",
+    )
+    print(
+        "%.2f" % precision,
+        "%",
+        "%.2f" % recall,
+        "%",
+        "%.2f" % F1_score,
+        "%",
+        "%.2f" % accuracy,
+        "%",
+    )
 
     # Support Vector Machines
 
@@ -341,16 +423,58 @@ if __name__ == "__main__":
     precision = precision_score(
         validation_label, svm_validation_predictions, average="micro"
     )
+    precision = precision * 100.0
     recall = recall_score(validation_label, svm_validation_predictions, average="micro")
+    recall = recall * 100.0
     F1_score = f1_score(validation_label, svm_validation_predictions, average="micro")
+    F1_score = F1_score * 100.0
     accuracy = accuracy_score(validation_label, svm_validation_predictions)
-    print("Precision_Val_SVM",",",  "Recall_Val_SVM", ",", "F1_score_Val_SVM", ",", "Accuracy_Val_SVM")
-    print(precision, recall, F1_score, accuracy)
+    accuracy = accuracy * 100.0
+    print(
+        "Precision_Val_SVM",
+        ",",
+        "Recall_Val_SVM",
+        ",",
+        "F1_score_Val_SVM",
+        ",",
+        "Accuracy_Val_SVM",
+    )
+    print(
+        "%.2f" % precision,
+        "%",
+        "%.2f" % recall,
+        "%",
+        "%.2f" % F1_score,
+        "%",
+        "%.2f" % accuracy,
+        "%",
+    )
 
     svm_test_predictions = svm.predict(cv_test_features)
     precision = precision_score(test_label, svm_test_predictions, average="micro")
+    precision = precision * 100.0
     recall = recall_score(test_label, svm_test_predictions, average="micro")
+    recall = recall * 100.0
     F1_score = f1_score(test_label, svm_test_predictions, average="micro")
+    F1_score = F1_score * 100.0
     accuracy = accuracy_score(test_label, svm_test_predictions)
-    print("Precision_Test_SVM",",",  "Recall_Test_SVM", ",", "F1_score_Test_SVM", ",", "Accuracy_Test_SVM")
-    print(precision, recall, F1_score, accuracy)
+    accuracy = accuracy * 100.0
+    print(
+        "Precision_Test_SVM",
+        ",",
+        "Recall_Test_SVM",
+        ",",
+        "F1_score_Test_SVM",
+        ",",
+        "Accuracy_Test_SVM",
+    )
+    print(
+        "%.2f" % precision,
+        "%",
+        "%.2f" % recall,
+        "%",
+        "%.2f" % F1_score,
+        "%",
+        "%.2f" % accuracy,
+        "%",
+    )
