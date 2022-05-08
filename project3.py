@@ -79,6 +79,8 @@ def normalize_text(df):
         df["Person"][i] = df["Person"][i].replace("young sadako", "sadako")
         df["Person"][i] = df["Person"][i].replace("peter parker", "tobey macguire")
         df["Person"][i] = df["Person"][i].replace("simon cowell", "cowell")
+        df["Person"][i] = df["Person"][i].replace("Simon", "cowell")
+        df["Person"][i] = df["Person"][i].replace("Jenny", "Jenny Latour")
         df["Person"][i] = df["Person"][i].replace("dolittle", "eddie murphy")
 
         # print(df["Sentence"][i], df["Person"][i])
@@ -96,9 +98,10 @@ def consolidate_names(df):
 
             if "peter" not in df["Person"][i]:
                 if "simon" not in df["Person"][i]:
-                    if df["Person"][i] in df["Person"][j]:
+                    if "Christopher" not in df["Person"][i]:
+                        if df["Person"][i] in df["Person"][j]:
 
-                        df["Person"][i] = df["Person"][j]
+                            df["Person"][i] = df["Person"][j]
 
     return df
 
@@ -161,11 +164,11 @@ if __name__ == "__main__":
     df = create_dataframe(filename)
 
     # adjust line below as needed
-    df = df.iloc[0:1443]
+    df = df.iloc[0:2054]
 
     # there seem to be some bad lines in her
 
-    df = df.drop(index=[440, 441, 442, 443, 444, 445, 1135, 1136, 1137, 1138, 1139])
+    df = df.dropna()
 
     # there seem to be some bad lines in her
 
@@ -282,6 +285,8 @@ if __name__ == "__main__":
     recall = recall_score(validation_label, mnb_validation_predictions, average="micro")
     F1_score = f1_score(validation_label, mnb_validation_predictions, average="micro")
     accuracy = accuracy_score(validation_label, mnb_validation_predictions)
+    print("Precision_Val_Bayes",",",  "Recall_Val_Bayes", ",", "F1_score_Val_Bayes", ",", "Accuracy_Val_Bayes") 
+
     print(precision, recall, F1_score, accuracy)
 
     mnb_test_predictions = mnb.predict(cv_test_features)
@@ -289,6 +294,8 @@ if __name__ == "__main__":
     recall = recall_score(test_label, mnb_test_predictions, average="micro")
     F1_score = f1_score(test_label, mnb_test_predictions, average="micro")
     accuracy = accuracy_score(test_label, mnb_test_predictions)
+    print("Precision_Test_Bayes", ",", "Recall_Test_Bayes", ",", "F1_score_Test_Bayes", ",", "Accuracy_Test_Bayes")
+
     print(precision, recall, F1_score, accuracy)
 
     # Logistic Regression
@@ -308,6 +315,8 @@ if __name__ == "__main__":
     recall = recall_score(validation_label, lr_validation_predictions, average="micro")
     F1_score = f1_score(validation_label, lr_validation_predictions, average="micro")
     accuracy = accuracy_score(validation_label, lr_validation_predictions)
+
+    print("Precision_Val_LR",",",  "Recall_Val_LR", ",", "F1_score_Val_LR", ",", "Accuracy_Val_LR") 
     print(precision, recall, F1_score, accuracy)
 
     lr_test_predictions = lr.predict(cv_test_features)
@@ -315,6 +324,8 @@ if __name__ == "__main__":
     recall = recall_score(test_label, lr_test_predictions, average="micro")
     F1_score = f1_score(test_label, lr_test_predictions, average="micro")
     accuracy = accuracy_score(test_label, lr_test_predictions)
+
+    print("Precision_Test_LR",",",  "Recall_Test_LR", ",", "F1_score_Test_LR", ",", "Accuracy_Test_LR")
     print(precision, recall, F1_score, accuracy)
 
     # Support Vector Machines
@@ -333,6 +344,7 @@ if __name__ == "__main__":
     recall = recall_score(validation_label, svm_validation_predictions, average="micro")
     F1_score = f1_score(validation_label, svm_validation_predictions, average="micro")
     accuracy = accuracy_score(validation_label, svm_validation_predictions)
+    print("Precision_Val_SVM",",",  "Recall_Val_SVM", ",", "F1_score_Val_SVM", ",", "Accuracy_Val_SVM")
     print(precision, recall, F1_score, accuracy)
 
     svm_test_predictions = svm.predict(cv_test_features)
@@ -340,4 +352,5 @@ if __name__ == "__main__":
     recall = recall_score(test_label, svm_test_predictions, average="micro")
     F1_score = f1_score(test_label, svm_test_predictions, average="micro")
     accuracy = accuracy_score(test_label, svm_test_predictions)
+    print("Precision_Test_SVM",",",  "Recall_Test_SVM", ",", "F1_score_Test_SVM", ",", "Accuracy_Test_SVM")
     print(precision, recall, F1_score, accuracy)
