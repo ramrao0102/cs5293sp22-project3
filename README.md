@@ -6,8 +6,9 @@ This project consists of taking text files from the IMDB database and generating
 sentence that consist of text surrounding the redacted word.  The redacted word is the name in the sentence. <br>
 The focus of the second part of the project is to find the redacted word with the use of classfication models. <br>
 
+## RAM Requirement
 
-
+Use, atleast 8 GB RAM, for the VM instance for execution of code.<br>
 
 ## How to Run the Code
 
@@ -28,7 +29,7 @@ In order to complete the redaction, the following process is followed: <br>
 1) The code to run from command line is pipenv run python redactor.py. <br> 
 2) The .txt files from the IMDB database are placed in the /data folder under the root. <br>
 3) Funtions have been created to find the entity_name == "PERSON" in each sentence and then to redact the name. <br>
-   NLTK's ne_chunk is used to perform this activity. <br>
+   NLTK's ne_chunk is used to perform this activity Functions are find_entity and redact_name. <br>
 4) The code then generates 90 sentences with the redacted_name and the redacted_sentence as tab separated file. <br>
 5) The tab separated file has 50 training sentences, 30 validation sentences, and 10 test sentences. <br>
 6) This file is then combined with the unredactor.tsv fetched from cegme repository and creates a final.tsv file which is then used to upload to cegme.<br>
@@ -37,14 +38,15 @@ In order to complete the redaction, the following process is followed: <br>
 
 For the unredaction, the following process is utilized: <br>
 1) The code to run from the command line is pipenv run python project3.py. <br>
-2) "unredactor.tsv" file is downloaded from "cegme" repository using urllib package. <br>
-3) The file is then read into a pandas dataframe. <br>
+2) "unredactor.tsv" file is downloaded from "cegme" repository using urllib package with download_file function. <br>
+3) The file is then read into a pandas dataframe with create_dataframe function. <br>
 4) NA lines are removed form the pandas dataframe. <br>
-5) Column positions are swapped to move the "Person" column to the far right. This is the true label for the classification.<br>
-6) Text is normalized to remove select features that do not contribute to the classification. <br>
+5) Column positions are swapped to move the "Person" column to the far right. This is the true label for the classification with swap_columns function.<br>
+6) Text is normalized to remove select features that do not contribute to the classification with normalize_text function. <br>
 7) The redaction characters are removed from the features. <br>
-8) Additional column is created in the data_frame with features (16 words max) that surround the redacted_name. <br>
-9) After this step, the dataframe is broken out into training, test, and validation dataframes. <br>
+8) First or Last Names are consolidate when First and Last Names are both present in string with consolidate_names function. <br>
+9) Additional column is created in the data_frame with features (16 words max) that surround the redacted_name with feature_selection function. <br>
+10) After this step, the dataframe is broken out into training, test, and validation dataframes. <br>
 
 ## Unredaction Classification
 
@@ -72,7 +74,7 @@ The developed program is tested using pytest. <br>
 
 ## Video Link
 
+It is inclded here as: Project305072022.mp4
 Video Link to Video Hosted on Vimeo Site is provided below.
-
 
 https://vimeo.com/707420262
