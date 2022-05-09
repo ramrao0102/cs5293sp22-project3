@@ -55,8 +55,9 @@ For the classification, i.e., to find the missing or the redacted_name following
 1) The features, i.e., the context around the redacted_name are vectorized using count vectorizer and TfIDf vectorizers<br>
 in the train, validation, and test datasets. <br>
 2) Three models are used to train the data, Multinomial Bayes, Logistic Regression, and Support Vector Machines.<br>
-3) The model is trained on the training dataset and then checked on the validation and the testing datasets. <br>
-4) Precision, Recall, F1_score, and Accuracy results for each model for both the validation and the test datasets are <br>
+3) Multinomial Bayes has been commented out in the final version. <br>
+4) The model is trained on the training dataset and then checked on the validation and the testing datasets. <br>
+5) Precision, Recall, F1_score, and Accuracy results for each model for both the validation and the test datasets are <br>
 printed to the console. <br>
 
 
