@@ -4,7 +4,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="project2",
+    name="project3",
     version="0.1",
     author="class",
     author_email="ramkishore.rao-1@ou.edu",

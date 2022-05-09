@@ -1,0 +1,11 @@
+README.md
+setup.cfg
+setup.py
+project3.egg-info/PKG-INFO
+project3.egg-info/SOURCES.txt
+project3.egg-info/dependency_links.txt
+project3.egg-info/top_level.txt
+test/test_dataframe.py
+test/test_download.py
+test/test_istheredata.py
+test/test_prediction.py

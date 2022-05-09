@@ -110,8 +110,10 @@ def redact_name(list1, text):
     list2 = list1
 
     for i in range(len(list2)):
-
+        
+        
         if i == 0:
+
 
             if list2[i].isspace():
 
@@ -123,7 +125,7 @@ def redact_name(list1, text):
 
             else:
 
-                data1 = data1.replace(list2[i], "\u2588" * len(list2[i]))
+                data1 = re.sub(list2[i], "\u2588" * len(list2[i]), data1, count = 1)
 
     return data1
 
@@ -144,7 +146,7 @@ if __name__ == "__main__":
     j = 0
 
     for i in files_grabbed:
-        # print(i)
+        print(i)
         file_name = i
         with open(i) as f:
             text = f.read()
@@ -167,7 +169,7 @@ if __name__ == "__main__":
                 redacted_text = redacted_text.replace("!", "")
                 redacted_text = redacted_text.replace("'s", " ")
 
-                # print(list4[i][0], redacted_text)
+                print(list4[i][0], redacted_text)
                 if redacted_text != "":
                     j += 1
                     # print(j)

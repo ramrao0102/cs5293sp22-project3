@@ -164,7 +164,7 @@ if __name__ == "__main__":
     df = create_dataframe(filename)
 
     # adjust line below as needed
-    df = df.iloc[0:2054]
+    df = df.iloc[0:2891]
 
     # there seem to be some bad lines in her
 
@@ -269,76 +269,76 @@ if __name__ == "__main__":
 
     # tv_test_features = tv.transform(test_corpus)
 
-    mnb = MultinomialNB(alpha=1)
-    mnb.fit(cv_train_features, train_label)
+    #mnb = MultinomialNB(alpha=1)
+    #mnb.fit(cv_train_features, train_label)
 
-    mnb_bow_validation_score = mnb.score(cv_validation_features, validation_label)
+    #mnb_bow_validation_score = mnb.score(cv_validation_features, validation_label)
 
-    mnb_bow_test_score = mnb.score(cv_test_features, test_label)
+    #mnb_bow_test_score = mnb.score(cv_test_features, test_label)
     # print(mnb_bow_validation_score)
     # print(mnb_bow_test_score)
 
-    mnb_validation_predictions = mnb.predict(cv_validation_features)
-    precision = precision_score(
-        validation_label, mnb_validation_predictions, average="micro"
-    )
-    precision = precision * 100.0
-    recall = recall_score(validation_label, mnb_validation_predictions, average="micro")
-    recall = recall * 100.0
-    F1_score = f1_score(validation_label, mnb_validation_predictions, average="micro")
-    F1_score = F1_score * 100.0
-    accuracy = accuracy_score(validation_label, mnb_validation_predictions)
-    accuracy = accuracy * 100.0
-    print(
-        "Precision_Val_Bayes",
-        ",",
-        "Recall_Val_Bayes",
-        ",",
-        "F1_score_Val_Bayes",
-        ",",
-        "Accuracy_Val_Bayes",
-    )
+    #mnb_validation_predictions = mnb.predict(cv_validation_features)
+    #precision = precision_score(
+    #    validation_label, mnb_validation_predictions, average="micro"
+    #)
+    #precision = precision * 100.0
+    #recall = recall_score(validation_label, mnb_validation_predictions, average="micro")
+    #recall = recall * 100.0
+    #F1_score = f1_score(validation_label, mnb_validation_predictions, average="micro")
+    #F1_score = F1_score * 100.0
+    #accuracy = accuracy_score(validation_label, mnb_validation_predictions)
+    #accuracy = accuracy * 100.0
+    #print(
+    #    "Precision_Val_Bayes",
+    #    ",",
+    #    "Recall_Val_Bayes",
+    #    ",",
+    #    "F1_score_Val_Bayes",
+    #    ",",
+    #    "Accuracy_Val_Bayes",
+    #)
 
-    print(
-        "%.2f" % precision,
-        "%",
-        "%.2f" % recall,
-        "%",
-        "%.2f" % F1_score,
-        "%",
-        "%.2f" % accuracy,
-        "%",
-    )
+    #print(
+    #   "%.2f" % precision,
+    #    "%",
+    #    "%.2f" % recall,
+    #    "%",
+    #    "%.2f" % F1_score,
+    #    "%",
+    #    "%.2f" % accuracy,
+    #    "%",
+    #)
 
-    mnb_test_predictions = mnb.predict(cv_test_features)
-    precision = precision_score(test_label, mnb_test_predictions, average="micro")
-    precision = precision * 100.0
-    recall = recall_score(test_label, mnb_test_predictions, average="micro")
-    recall = recall * 100.0
-    F1_score = f1_score(test_label, mnb_test_predictions, average="micro")
-    F1_score = F1_score * 100.0
-    accuracy = accuracy_score(test_label, mnb_test_predictions)
-    accuracy = accuracy * 100.0
-    print(
-        "Precision_Test_Bayes",
-        ",",
-        "Recall_Test_Bayes",
-        ",",
-        "F1_score_Test_Bayes",
-        ",",
-        "Accuracy_Test_Bayes",
-    )
+    #mnb_test_predictions = mnb.predict(cv_test_features)
+    #precision = precision_score(test_label, mnb_test_predictions, average="micro")
+    #precision = precision * 100.0
+    #recall = recall_score(test_label, mnb_test_predictions, average="micro")
+    #recall = recall * 100.0
+    #F1_score = f1_score(test_label, mnb_test_predictions, average="micro")
+    #F1_score = F1_score * 100.0
+    #accuracy = accuracy_score(test_label, mnb_test_predictions)
+    #accuracy = accuracy * 100.0
+    #print(
+    #    "Precision_Test_Bayes",
+    #    ",",
+    #    "Recall_Test_Bayes",
+    #    ",",
+    #    "F1_score_Test_Bayes",
+    #    ",",
+    #    "Accuracy_Test_Bayes",
+    #)
 
-    print(
-        "%.2f" % precision,
-        "%",
-        "%.2f" % recall,
-        "%",
-        "%.2f" % F1_score,
-        "%",
-        "%.2f" % accuracy,
-        "%",
-    )
+    #print(
+    #    "%.2f" % precision,
+    #    "%",
+    #    "%.2f" % recall,
+    #    "%",
+    #    "%.2f" % F1_score,
+    #    "%",
+    #    "%.2f" % accuracy,
+    #    "%",
+    #)
 
     # Logistic Regression
 
